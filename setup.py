@@ -13,7 +13,7 @@ requires = ['ply>=3.4',
 setup(
     name='jssc',
     version='0.1',
-    description='JavaScript Source Compiler',
+    description='JavaScript Compilation Assistant',
     long_description=readme,
     author='Adam Venturella',
     author_email='aventurella@gmail.com',
