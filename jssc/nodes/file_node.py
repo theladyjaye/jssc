@@ -22,13 +22,17 @@ class FileNode(BaseNode):
             with io.open(path) as f:
                 env['files'].append(path)
                 lexer.input(f.read().encode('utf-8'))
+            
+            debug_info = env["debug_info"]
+            debug_info_every = env["debug_info_every"]
+            
             for token in lexer:
                 if token.type == 'IMPORT':
                     import_node = ImportNode(lexer)
                     file_node = FileNode(str(import_node))
                     file_node(out)
                 elif token.type == 'CODE':
-                    if token.lineno % 10 == 1:
+                    if debug_info and token.lineno % debug_info_every == 1:
                         out.write(u"/* [jssc] {} @ line {} */\n".format(self.path, token.lineno))
                 
                 if token.type != "IMPORT":

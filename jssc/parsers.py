@@ -20,8 +20,10 @@ class Parser(object):
 class JavaScriptParser(Parser):
 
     def render(self):
-        print("{} -> {}".format(str(self.root), self.output))
-
+        if env['quiet'] == False:
+            print("{} -> {}".format(str(self.root), self.output))
+        
+        out = None
         try:
             out = io.open(self.output, "w")
             self.root(out)

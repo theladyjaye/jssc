@@ -44,7 +44,7 @@ def t_parsing_error(t):
     t.lexer.skip(1)
 
 def t_MULTICOMMENT_START(t):
-    r'\/\*+'
+    r'\s*\/\*+'
     t.lexer.begin('comments')
     return t
 
@@ -53,10 +53,9 @@ def t_COMMENT(t):
     return t
 
 def t_comments_MULTICOMMENT_END(t):
-    r'\s\*+\/'
+    r'\s*\*+\/'
     t.lexer.begin('INITIAL')
     return t
-
 def t_comments_error(t):
     t.lexer.skip(1)
 
