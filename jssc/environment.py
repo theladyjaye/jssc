@@ -1,5 +1,5 @@
 env = {"parser":None,
-       "imports":[],
+       "lexers":[],
        "files":[],
        "lexer":None,
        "base_dir":"",

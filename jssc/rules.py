@@ -6,6 +6,7 @@ states = (
 tokens = (
    'START',
    'IMPORT',
+   'DEFINE',
    'DOT',
    'VALUE',
    'CODE',
@@ -32,6 +33,10 @@ def t_START(t):
 # 4.3 Specification of tokens
 def t_parsing_IMPORT(t):
     r'import'
+    return t
+
+def t_parsing_DEFINE(t):
+    r'define'
     return t
 
 def t_parsing_END(t):

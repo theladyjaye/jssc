@@ -26,6 +26,7 @@ class FileNode(BaseNode):
             debug_info = env["debug_info"]
             debug_info_every = env["debug_info_every"]
             
+            env['lexers'].append(lexer)
             for token in lexer:
                 if token.type == 'IMPORT':
                     import_node = ImportNode(lexer)
@@ -35,7 +36,7 @@ class FileNode(BaseNode):
                     if debug_info and token.lineno % debug_info_every == 1:
                         out.write(u"/* [jssc] {} @ line {} */\n".format(self.path, token.lineno))
                 
-                if token.type != "IMPORT":
+                if token.type == "IMPORT":
                     out.write(u"{}\n".format(token.value))
 
         except IOError as e:
