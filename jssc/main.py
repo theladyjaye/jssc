@@ -13,6 +13,7 @@ def get_args():
                    help='Path to output file')
 
     a_parser.add_argument("-q", "--quiet", action="store_true", help='Supress any output messages')
+    a_parser.add_argument("-m", "--minify", action="store_true", help='Minify the resulting file. the JSSC environment variable will be read to determine the method to use.')
     a_parser.add_argument('-g', '--debug-info', help='Enable debug info in output', action="store_true")
     a_parser.add_argument('--debug-info-every', default=10, type=int,
                    help='If debug info is enable, you can set to display it after N lines. The default is 10')
@@ -28,6 +29,18 @@ def main():
     env["debug_info"] = args.debug_info
     env["debug_info_every"] = args.debug_info_every
     env['quiet'] = args.quiet
+    env['minify'] = args.minify
+    
+    if args.minify:
+        env["debug_info"] = False
+        
+    try:
+        env['minify_command'] = os.environ['JSSC']
+    except KeyError:
+        env['minify'] = False
+        if args.minify:
+            print('Could not read JSSC Environment variable. Minification aborted.')
+            sys.exit(1)
 
     if output is None:
         directory = os.path.dirname(input)
