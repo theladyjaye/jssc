@@ -30,34 +30,38 @@ class JavaScriptParser(Parser):
         else:
             self.compile()
 
+        print(env['define'])
+
     def compile_minify(self):
-        out = None
+        #out = None
         try:
-            out = tempfile.NamedTemporaryFile(delete=False)
-            self.root(out)
+            #out = tempfile.NamedTemporaryFile(delete=False)
+            self.root()
         except IOError as e:
             print(e)
         finally:
-            if out:
-                out.close()
-                command = env['minify_command'].format(infile=out.name, outfile=self.output)
-                try:
-                    subprocess.call(command.split(' '))
-                except OSError as e:
-                    print(e)
+            pass
+            #if out:
+            #    out.close()
+            #    command = env['minify_command'].format(infile=out.name, outfile=self.output)
+            #    try:
+            #        subprocess.call(command.split(' '))
+            #    except OSError as e:
+            #        print(e)
 
-                os.unlink(out.name)
+            #    os.unlink(out.name)
 
 
     def compile(self):
-        out = None
+        #out = None
         try:
-            out = io.open(self.output, "w")
-            self.root(out)
+            #out = io.open(self.output, "w")
+            self.root()
         except IOError as e:
             print(e)
         finally:
-            if out:
-                out.close()
+            pass
+            #if out:
+            #    out.close()
 
 
